@@ -17,6 +17,17 @@ class Game {
   }
 
   registerEvents() {
+    document.addEventListener("keydown", (event) => {
+      const activeSymbol = this.currentSymbol.textContent.toLowerCase();
+      const symbol = event.key.toLowerCase();
+
+      if(activeSymbol === symbol) {
+        this.success();
+      } else {
+        this.fail();
+      }
+    });
+  } 
     /*
       TODO:
       Написать обработчик события, который откликается
@@ -25,8 +36,7 @@ class Game {
       При неправильном вводе символа - this.fail();
       DOM-элемент текущего символа находится в свойстве this.currentSymbol.
      */
-  }
-
+  
   success() {
     if(this.currentSymbol.classList.contains("symbol_current")) this.currentSymbol.classList.remove("symbol_current");
     this.currentSymbol.classList.add('symbol_correct');
@@ -89,6 +99,8 @@ class Game {
     this.currentSymbol = this.wordElement.querySelector('.symbol_current');
   }
 }
+
+
 
 new Game(document.getElementById('game'))
 
